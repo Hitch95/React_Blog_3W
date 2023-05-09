@@ -22,13 +22,13 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(inputs)
-      console.log(res.data);
+      await login(inputs);
       navigate("/");
     } catch (err) {
       setError(err.response.data);
     }
   };
+
 
   return (
     <div className="auth">
@@ -51,7 +51,7 @@ const Login = () => {
         <button onClick={handleSubmit}>Login</button>
         {error && <p>{error}</p>}
         <span>
-          Don't you have an account? 
+          Don't you have an account?
           <Link to="/register">Register</Link>
         </span>
       </form>

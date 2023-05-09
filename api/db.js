@@ -1,4 +1,4 @@
-import mysql from "mysql2";
+import mysql from "mysql2/promise";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -11,7 +11,7 @@ export const options = {
 };
 
 export function createClassicConnexion() {
-    return mysql.createConnection(options).promise();
+    return mysql.createConnection(options);
 };
 
 let pool = null;

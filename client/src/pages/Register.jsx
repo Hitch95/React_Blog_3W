@@ -20,20 +20,20 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost:8800/api/auth/register", inputs);
-            console.log(res.data);
+            const res = await axios.post("http://localhost:8800/api/auth/register", inputs);
             navigate("/login");
         } catch (error) {
-            setError(error.response.data);
+            setError(error.res.data);
         }
     };
+    
 
     return (
         <div className="auth">
             <h1>Register</h1>
             <form>
                 <input type="text" placeholder="username" name="username" onChange={handleChange} required />
-                <input type="mail" placeholder="email" name="mail" onChange={handleChange} required />
+                <input type="email" placeholder="email" name="email" onChange={handleChange} required />
                 <input type="password" placeholder="password" name="password" onChange={handleChange} required />
                 <button onClick={handleSubmit}>Register</button>
                 {error && <p>{error}</p>}
