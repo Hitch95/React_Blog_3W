@@ -40,10 +40,13 @@ export async function insert(table, data) {
     }
 }
 
+async function deleteRow(table, id) {
+    const sql = `DELETE FROM ${table} WHERE id = ?`;
+    const result = await find(sql, [id], true);
 
+    return result;
+}
 
-// table, id, {fields: values}
-// SET field1 = 1, field2 = 2
 async function update(table, id, entries) {
     const keys = Object.keys(entries);
     const values = Object.values(entries);
@@ -53,10 +56,12 @@ async function update(table, id, entries) {
     return getPoolConnexion().query(sql, args);
 }
 
+
 export default {
     find,
     findOne,
     findAll,
     insert,
-    update
+    update,
+    deleteRow
 }

@@ -11,22 +11,22 @@ export const register = async (req, res) => {
         const email = req.body.email;
         const username = req.body.username;
 
-        // Vérifier si un utilisateur avec le même email existe déjà
+        // Check if a user with the same email already exists
         const userByEmail = await userRepository.findOneByEmail(email);
         if (userByEmail) {
             return res.status(409).json("L'utilisateur existe déjà !");
         }
 
-        // Vérifier si un utilisateur avec le même nom d'utilisateur existe déjà
+        // Check if a user with the same username already exists
         const userByUsername = await userRepository.findOneByUsername(username);
         if (userByUsername) {
             return res.status(409).json("Le nom d'utilisateur est déjà pris !");
         }
 
-        // Hasher le mot de passe
+        // Hash the password
         const hashedPassword = await argon2.hash(req.body.password);
 
-        // Créer un nouvel utilisateur avec le hash du mot de passe
+        // Create a new user with the hashed password
         await baseRepository.insert("users", { username, email, password: hashedPassword });
 
         return res.status(200).json("L'utilisateur a été créé");
@@ -40,22 +40,23 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
     try {
-        // Vérifier si l'utilisateur existe
+        // Check if the user exists
         const user = await userRepository.findOneByUsername(req.body.username);
         if (!user) {
             return res.status(404).json("Utilisateur non trouvé");
         }
 
-        // Vérifier le mot de passe
+        // Check the password
         const isPasswordOk = await argon2.verify(user.password, req.body.password);
         if (!isPasswordOk) {
             return res.status(400).json("Nom d'utilisateur ou mot de passe incorrect");
         }
 
-        // Générer un token JWT
-        const token = jwt.sign({ id: user.id }, "jwtkey");
+        // Generate a JWT token
+        const token = jwt.sign({ id: user.id },
+            "0i&eVUo5vrAC3~q0@Ms|_Jd{7s*x7K.h@(+@fp5JRL|N!3#'&,N3lv!|=s==HQ'");
 
-        // Retourner l'utilisateur sans le mot de passe et le token d'accès dans un cookie HttpOnly
+        // Return the user without the password and the access token in an HttpOnly cookie
         const { password, ...other } = user;
 
         res.cookie("access_token", token, {

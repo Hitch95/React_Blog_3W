@@ -1,25 +1,46 @@
 import baseRepository from "./baseRepository.js";
 
-async function findPostBySlug(slug) {
-    return baseRepository
-        .findOne(`SELECT p.*, u.username AS author_pseudo FROM posts p
-            INNER JOIN users u ON u.id = p.author_id
-            WHERE p.slug = ?`, 
-            [slug]
-        )
+async function insertPost(post) {
+    const { author_id, title, description, image } = post;
+    const data = {
+        author_id,
+        title,
+        description,
+        image,
+    };
+
+    return baseRepository.insert("posts", data);
 }
 
-async function findPost(id) {
-    return baseRepository
-        .findOne(`SELECT p.*, u.username AS author_pseudo FROM posts p
-        INNER JOIN users u ON u.id = p.author_id
-        WHERE p.id = ?`, 
-            [id]
-        )
+export async function updatePost(id, entries) {
+    await baseRepository.update("posts", id, entries);
 }
+
+export async function deletePost(id) {
+    await deleteRow("posts", id);
+}
+
+export async function findPost(id) {
+    return baseRepository.findOne(` SELECT posts.id, users.username, posts.title, posts.description, posts.image, posts.created_at, users.image AS userImg, posts.category
+                                    FROM posts
+                                    INNER JOIN users ON users.id = posts.author_id
+                                    WHERE posts.id = ?
+                                `,
+        [id]
+    );
+}
+
+export async function findAllPosts() {
+    return baseRepository.findAll("posts");
+}
+
+
 
 export default {
-    findPostBySlug,
+    insertPost,
+    updatePost,
+    deletePost,
     findPost,
+    findAllPosts,
     ...baseRepository
 }

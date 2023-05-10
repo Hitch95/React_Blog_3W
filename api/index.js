@@ -18,7 +18,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 
 app.get("/", (req, res) => {
-    res.json("hello this is the backend")
+    res.json("hello this is the backend");
 })
 
 app.listen(8800, () => {

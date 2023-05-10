@@ -5,11 +5,11 @@ async function findOneByEmail(email) {
 }
 
 async function findOneByUsername(username) {
-    return baseRepository.findOne(`SELECT * FROM users WHERE email = ?`, [username]);
+    return baseRepository.findOne(`SELECT * FROM users WHERE username = ?`, [username]);
 }
 
 async function findOneById(id) {
-    return baseRepository.findOne(`SELECT * FROM users WHERE username = ?`, [id]);
+    return baseRepository.findOne(`SELECT * FROM users WHERE id = ?`, [id]);
 }
 
 async function insertUser(user) {

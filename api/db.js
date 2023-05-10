@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const options = {
+const options = {
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
     password: process.env.DB_PASSWORD,
@@ -15,6 +15,7 @@ export function createClassicConnexion() {
 };
 
 let pool = null;
+
 export function getPoolConnexion() {
     if (pool) {
         return pool;
