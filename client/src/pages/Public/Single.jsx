@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../../context/authContext";
 
 import axios from "axios";
 import moment from "moment";
 import DOMPurify from "dompurify";
 
-import Menu from "../components/Menu";
-import Edit from "../images/edit.png";
-import Delete from "../images/delete.png";
+import Menu from "../../components/public/Menu";
+import Edit from "../../images/edit.png";
+import Delete from "../../images/delete.png";
 
 
 const Single = () => {
@@ -74,7 +74,7 @@ const Single = () => {
                 <h1>{post.title}</h1>
                 <p
                     dangerouslySetInnerHTML={{
-                        __html: DOMPurify.sanitize(post.desc),
+                        __html: DOMPurify.sanitize(post.description),
                     }}
                 >
                 </p>

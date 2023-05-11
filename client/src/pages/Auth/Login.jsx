@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../../context/authContext";
+
 
 const Login = () => {
   const [inputs, setInputs] = useState({
@@ -52,7 +53,7 @@ const Login = () => {
         {error && <p>{error}</p>}
         <span>
           Don't you have an account?
-          <Link to="/register">Register</Link>
+          <Link to="/auth/register">Register</Link>
         </span>
       </form>
     </div>

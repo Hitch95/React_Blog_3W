@@ -1,7 +1,10 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../images/Logo.png";
-import { AuthContext } from "../context/authContext";
+
+import { AuthContext } from "../../context/authContext";
+
+import Logo from "../../images/Logo.png";
+
 
 const Navbar = () => {
 
@@ -12,7 +15,7 @@ const Navbar = () => {
       <div className="container">
         <div className="logo">
           <Link to="/">
-          <img src={Logo} alt="" />
+          <img src={Logo} alt="logo" />
           </Link>
         </div>
         <div className="links">
@@ -32,7 +35,7 @@ const Navbar = () => {
           {currentUser ? (
             <span onClick={logout}>Logout</span>
           ) : (
-            <Link className="link" to="/login">
+            <Link className="link" to="/auth/login">
               Login
             </Link>
           )}

@@ -39,7 +39,7 @@ const Register = () => {
                 {error && <p>{error}</p>}
                 <span>
                     Do you have an account? 
-                    <Link to="/login">Login</Link>
+                    <Link to="/auth/login">Login</Link>
                 </span>
             </form>
         </div>
