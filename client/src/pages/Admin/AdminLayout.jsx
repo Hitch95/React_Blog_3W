@@ -5,7 +5,7 @@ import SideMenu from "../../components/admin/SideMenu";
 
 const AdminLayout = () => {
     return (
-        <div className="">
+        <div className="AdminLayout">
             <Header />
             <div id="admin">
                 <SideMenu />

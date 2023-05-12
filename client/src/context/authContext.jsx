@@ -28,6 +28,11 @@ export const AuthContexProvider = ({ children }) => {
         }
     };
 
+    /*  Other Way 
+    const isAdmin = () => {
+        return currentUser && currentUser.role_name === "admin";
+    };
+    */
 
     const logout = async (inputs) => {
         await axios.post("http://localhost:8800/api/auth/logout");

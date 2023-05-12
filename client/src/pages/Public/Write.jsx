@@ -31,13 +31,13 @@ const Write = () => {
 
         try {
             state
-                ? await axios.put(`/posts/${state.id}`, {
+                ? await axios.put(`http://localhost:8800/api/posts/${state.id}`, {
                     title,
                     description: value,
                     category,
                     image: file ? imgUrl : "",
                 })
-                : await axios.post(`/posts/`, {
+                : await axios.post(`http://localhost:8800/api/posts/`, {
                     title,
                     description: value,
                     category,
@@ -106,7 +106,7 @@ const Write = () => {
                             id="nutrition"
                             onChange={(e) => setCategory(e.target.value)}
                         />
-                        <label htmlFor="nutrition">Science</label>
+                        <label htmlFor="nutrition">Nutrition</label>
                     </div>
                     <div className="cat">
                         <input

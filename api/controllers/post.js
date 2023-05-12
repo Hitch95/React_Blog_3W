@@ -26,12 +26,12 @@ export const getPost = async (req, res) => {
 };
 
 export const addPost = async (req, res) => {
-    const { author_id, title, description, img } = req.body;
+    const { author_id, title, description, image } = req.body;
     const post = {
         author_id,
         title,
         description,
-        img,
+        image,
     };
 
     try {

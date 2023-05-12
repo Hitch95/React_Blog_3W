@@ -7,47 +7,101 @@ nav {
         align-items: center;
         justify-content: space-between;
 
+        // Logo
         .logo {
             img {
                 width: 120px;
             }
         }
 
-        .links {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-
-            h6 {
-                font-size: 16px;
-                font-weight: 300;
-            }
+        // Hamburger
+        .toggle {
+            display: none;
+            min-width: 25px;
+            height: 20px;
+            position: relative;
+            cursor: pointer;
 
             span {
-                cursor: pointer;
-            }
+                display: block;
+                width: 100%;
+                height: 3px;
+                background-color: #000;
+                position: absolute;
+                left: 0;
+                transition: all 0.3s ease-in-out;
 
-            .username {
-                color: lightgreen;
-            }
-
-            .write {
-                background-color: lightgreen;
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-weight: 300;
-                border: 1px solid white;
-
-                &:hover {
-                    color: teal;
-                    background-color: white;
-                    border: 1px solid teal;
+                &:nth-of-type(1) {
+                    top: 0;
+                }
+                &:nth-of-type(2) {
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+                &:nth-of-type(3) {
+                    bottom: 0;
                 }
             }
+
+            @media only screen and (max-width: 700px) {
+                display: block;
+            }
+        }
+
+        // The 4 links
+        .links {
+            display: none;
+            flex-direction: column;
+            align-items: start;
+            background-color: #fff;
+            transform: translateY(75px);
+            gap: 10px;
+            transition: all 0.3s ease-in-out;
+
+            h6 {
+                margin: 10px;
+                font-size: 16px;
+                font-weight: 300;
+
+                &:hover {
+                    color: lightgreen;
+                }
+            }
+        }
+        .links.active {
+            display: flex;
+
+            @media only screen and (min-width: 700px) {
+                transform: translateY(0);
+                flex-direction: row;
+            }
+        }
+
+        // Write
+        .write {
+            background-color: lightgreen;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 300;
+            border: 1px solid white;
+
+            &:hover {
+                color: teal;
+                background-color: white;
+                border: 1px solid teal;
+            }
+        }
+
+        span {
+            cursor: pointer;
+        }
+
+        .username {
+            color: lightgreen;
         }
     }
 }
