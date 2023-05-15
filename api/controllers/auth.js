@@ -4,6 +4,11 @@ import userRepository from "../repository/userRepository.js";
 
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+import { randomBytes } from "crypto";
+
+dotenv.config();
+const JWT_SECRET = randomBytes(64).toString("hex");
 
 
 export const register = async (req, res) => {
@@ -53,21 +58,27 @@ export const login = async (req, res) => {
         }
 
         // Generate a JWT token
-        const token = jwt.sign({ id: user.id },
-            "0i&eVUo5vrAC3~q0@Ms|_Jd{7s*x7K.h@(+@fp5JRL|N!3#'&,N3lv!|=s==HQ'");
+        const token = jwt.sign({ id: user.id }, JWT_SECRET, {
+            expiresIn: "1h",
+        });
 
         // Return the user without the password and the access token in an HttpOnly cookie
         const { password, ...other } = user;
 
-        res.cookie("access_token", token, {
-            httpOnly: true
-        }).status(200)
-            .json(other);
+        res
+            .cookie("access_token", token, {
+                httpOnly: true,
+            })
+            .status(200)
+            .json({ token, ...other });
+
     } catch (error) {
         console.error(error);
-        return res.status(500).json(error.message);
+        return res.status(500).json({ error: error.message });
     }
 };
+
+
 
 
 export const logout = (req, res) => {

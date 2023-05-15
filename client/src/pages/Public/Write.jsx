@@ -18,7 +18,7 @@ const Write = () => {
         try {
             const formData = new FormData();
             formData.append("file", file)
-            const res = await axios.post("/upload", formData)
+            const res = await axios.post("http://localhost:8800/api/upload", formData)
             return res.data;
         } catch (err) {
             console.log(err)
@@ -37,7 +37,7 @@ const Write = () => {
                     category,
                     image: file ? imgUrl : "",
                 })
-                : await axios.post(`http://localhost:8800/api/posts/`, {
+                : await axios.post(`http://localhost:8800/api/posts`, {
                     title,
                     description: value,
                     category,

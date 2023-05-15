@@ -50,6 +50,12 @@ async function createDB() {
                     FOREIGN KEY(role_id) REFERENCES roles(id)
                 )`);
 
+                await con.query(`CREATE TABLE sessions(
+                    sessid VARCHAR(50) NOT NULL PRIMARY KEY,
+                    content TEXT NOT NULL,
+                    expires_at DATETIME
+                )`);
+
 
                 // Remplissage des tables
                 const hash = await argon2.hash("password");
